@@ -34,26 +34,31 @@ async function performPupeeter() {
 
    console.log('I am here')
 
+   const browserUrl = "https://m.thesportstak.com/"
+   const width = 375
+   const height = 667
+   let now = new Date();
+
      const browser = await puppeteer.launch({
       headless: true,
       defaultViewport: {
-        width: 375,
-        height: 667
+        width: width,
+        height: height
       },
       args: ['--no-sandbox', '--disable-setuid-sandbox']
     });
     const page = await browser.newPage();
 
-    await page.goto("https://m.thesportstak.com/", { waitUntil: 'networkidle2' });
+    await page.goto(browserUrl, { waitUntil: 'networkidle2' });
 
-    const { lhr } = await lighthouse("https://m.thesportstak.com/", {
+    const { lhr } = await lighthouse(browserUrl, {
       port: (new URL(browser.wsEndpoint())).port,
       output: 'json',
       logLevel: 'info',
       disableDeviceEmulation: true,
       defaultViewport: {
-        width: 375,
-        height: 667
+        width: width,
+        height: height
       },
       // '--headless',
       chromeFlags: ['--headless', '--disable-mobile-emulation', '--no-sandbox', '--disable-setuid-sandbox']
@@ -69,6 +74,111 @@ async function performPupeeter() {
    
 
     await browser.close();
+
+    var reportCard = {
+      "type":"message",
+      "attachments":[
+         {
+            "contentType":"application/vnd.microsoft.card.adaptive",
+            "contentUrl":null,
+            "content":{
+             "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+       "type": "AdaptiveCard",
+       "version": "1.6",
+       "actions": [
+        {
+            "type": "Action.OpenUrl",
+            "title": "View",
+          "url": "https://autolighttak.web.app/report.html",
+            "role": "Button"
+        }
+    ],
+       "body": [
+           {
+               "type": "Container",
+               "items": [
+                   {
+                       "type": "TextBlock",
+                       "text": "Lighthouse report",
+                       "size": "Medium",
+                       "wrap": true,
+                       "style": "heading"
+                   },
+                   {
+                       "type": "TextBlock",
+                       "text": `${browserUrl} on device having size ${width} x ${height}`,
+                       "isSubtle": true,
+                       "spacing": "None",
+                       "wrap": true
+                   },
+                   {
+                       "type": "TextBlock",
+                       "text": `${now}`,
+                       "wrap": true
+                   }
+               ]
+           },
+           {
+               "type": "Container",
+               "spacing": "None",
+               "items": [
+                   {
+                       "type": "ColumnSet",
+                       "columns": [
+                           {
+                               "type": "Column",
+                               "width": "stretch",
+                               "items": [
+                                   {
+                                       "type": "TextBlock",
+                                       "text": `${lhr.categories.performance.score * 100}%`,
+                                       "size": "ExtraLarge",
+                                       "wrap": true
+                                   },
+                                   {
+                                       "type": "TextBlock",
+                                       "text": "Performance",
+                                       "color": 'attention',
+                                       "spacing": "None",
+                                       "wrap": true
+                                   }
+                               ]
+                           },
+                           {
+                               "type": "Column",
+                               "width": "auto",
+                               "items": [
+                                   {
+                                       "type": "FactSet",
+                                       "facts": [
+                                           {
+                                               "title": "Accessibility",
+                                               "value": `${lhr.categories.accessibility.score  * 100 }%`
+                                           },
+                                           {
+                                               "title": "Best Practices",
+                                               "value": `${lhr.categories['best-practices'].score  * 100}%`
+                                           },
+                                           {
+                                               "title": "SEO",
+                                               "value": `${lhr.categories.seo.score  * 100}%`
+                                           }
+                                       ]
+                                   }
+                               ]
+                           }
+                       ]
+                   }
+               ]
+           }
+       ]
+            }
+         }
+      ]
+   }
+   
+   
+   
 
     var newnwCard = {
         "type": "message",
@@ -147,7 +257,7 @@ async function performPupeeter() {
 
 
 
-      axios.post("https://indiatodaygroup.webhook.office.com/webhookb2/ef3ceb52-ff92-4f1b-a563-01ef9363f0a4@c6429039-bbd0-4d9b-8542-13cc4acc2d0c/IncomingWebhook/9ac3ba6d1c6e4ead982c91e954ccfb7b/dad1e98a-782b-49a3-a4d1-3a98aadf47cc", newnwCard).then(res => {
+      axios.post("https://indiatodaygroup.webhook.office.com/webhookb2/ef3ceb52-ff92-4f1b-a563-01ef9363f0a4@c6429039-bbd0-4d9b-8542-13cc4acc2d0c/IncomingWebhook/9ac3ba6d1c6e4ead982c91e954ccfb7b/dad1e98a-782b-49a3-a4d1-3a98aadf47cc", reportCard).then(res => {
         console.log(`statusCode: ${res.status}`)
         console.log(res)
       })
