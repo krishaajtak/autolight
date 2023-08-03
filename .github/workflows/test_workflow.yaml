@@ -20,3 +20,9 @@ jobs:
 
     - name: Run Lighthouse Audit
       run: node lighthouse.js
+
+    - name: Install Firebase CLI
+      run: npm install -g firebase-tools
+
+    - name: Deploy to Firebase
+      run: firebase deploy --only hosting --token 1//0gDeX04WCvax9CgYIARAAGBASNwF-L9IrRKT2A8cgskYyZSr7bq2SOJV9l2iHRJKR-CP0LY65I0wJ-IVlgxYvSd3DVodT1tBEbvw

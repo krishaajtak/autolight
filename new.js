@@ -62,11 +62,13 @@ async function performPupeeter() {
 
     const html = ReportGenerator.generateReport(lhr, 'html');
 
-    fs.writeFile('ReportHTML-' + "Krish" + '.html', html, (err) => {
-        if (err) {
-            console.error(err);
-        }
-    });
+    // fs.writeFile('report.html', html, (err) => {
+    //     if (err) {
+    //         console.error(err);
+    //     }
+    // });
+
+    fs.writeFileSync(path.join(__dirname, 'public', 'report.html'), html);
 
     await browser.close();
 

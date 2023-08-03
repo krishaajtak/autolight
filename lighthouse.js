@@ -6,8 +6,10 @@ var moment = require('moment');
 const puppeteer = require('puppeteer');
 const lighthouse = require('lighthouse');
 const ReportGenerator = require('lighthouse/report/generator/report-generator');
+// 1//0gIRST_01QokJCgYIARAAGBASNwF-L9IrsRhW7B2AzuOdTGBrJOdmO_AZUPyVFMJKaR_gUmS4jFo8q4fTC5K54SpRMBjuSpjc76s
 
-
+// 1//0gDeX04WCvax9CgYIARAAGBASNwF-L9IrRKT2A8cgskYyZSr7bq2SOJV9l2iHRJKR-CP0LY65I0wJ-IVlgxYvSd3DVodT1tBEbvw
+const fs = require('fs');
 
 const path = require('path')
 
@@ -61,6 +63,8 @@ async function performPupeeter() {
     // const lighthouse_results = generateReport(lhr);
 
     const html = ReportGenerator.generateReport(lhr, 'html');
+
+    fs.writeFileSync(path.join(__dirname, 'public', 'report.html'), html);
 
    
 
