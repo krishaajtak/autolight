@@ -34,7 +34,7 @@ async function performPupeeter() {
 
    console.log('I am here')
 
-   const browserUrl = "https://m.thesportstak.com/cricket-news/pat-cummins-australia-captain-undisplaced-fracture-left-radius-ruled-out-for-6-weeks-chief-selector-george-bailey-revealshttps://m.thesportstak.com/cricket-news/pat-cummins-australia-captain-undisplaced-fracture-left-radius-ruled-out-for-6-weeks-chief-selector-george-bailey-reveals"
+   const browserUrl = "https://m.thesportstak.com/"
    const width = 375
    const height = 667
    let now = new Date();
