@@ -34,7 +34,7 @@ async function performPupeeter() {
 
    console.log('I am here')
 
-   const browserUrl = "https://m.thesportstak.com/"
+   const browserUrl = "https://m.thesportstak.com/cricket-news/pat-cummins-australia-captain-undisplaced-fracture-left-radius-ruled-out-for-6-weeks-chief-selector-george-bailey-revealshttps://m.thesportstak.com/cricket-news/pat-cummins-australia-captain-undisplaced-fracture-left-radius-ruled-out-for-6-weeks-chief-selector-george-bailey-reveals"
    const width = 375
    const height = 667
    let now = new Date();
@@ -257,7 +257,7 @@ async function performPupeeter() {
 
 
 
-      axios.post("https://indiatodaygroup.webhook.office.com/webhookb2/ef3ceb52-ff92-4f1b-a563-01ef9363f0a4@c6429039-bbd0-4d9b-8542-13cc4acc2d0c/IncomingWebhook/9ac3ba6d1c6e4ead982c91e954ccfb7b/dad1e98a-782b-49a3-a4d1-3a98aadf47cc", reportCard).then(res => {
+      axios.post("https://indiatodaygroup.webhook.office.com/webhookb2/f9d0d11c-b35d-4c63-abcf-86021746b841@c6429039-bbd0-4d9b-8542-13cc4acc2d0c/IncomingWebhook/fd860f7994d74786a92a3b281e327446/bb104a27-6b22-43a7-98bd-46619c2a8f89", reportCard).then(res => {
         console.log(`statusCode: ${res.status}`)
         console.log(res)
       })
